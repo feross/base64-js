@@ -33,24 +33,38 @@
   "files": [
     "base64js.min.js",
     "index.d.ts",
-    "index.js"
+    "index.d.mts",
+    "index.js",
+    "index.mjs"
   ],
   "main": "index.js",
   "typings": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./index.d.mts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/feross/base64-js.git"
   },
   "scripts": {
-    "build": "browserify -s base64js -r ./ | minify > base64js.min.js",
-    "lint": "standard",
+    "build": "rollup index.mjs --file index.js --format cjs && rollup index.js --file base64js.min.js --format umd --name base64js --plugin terser",
+    "lint": "standard --ignore index.js --ignore base64js.min.js",
     "test": "npm run lint && npm run unit",
     "unit": "tape test/*.js"
   },
   "devDependencies": {
-    "babel-minify": "^0.5.1",
+    "@rollup/plugin-terser": "^0.4.4",
     "benchmark": "^2.1.4",
-    "browserify": "^17.0.0",
+    "rollup": "^4.19.0",
     "standard": "*",
     "tape": "^5.4.0"
   }
