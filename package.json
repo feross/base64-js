@@ -10,7 +10,7 @@
   "devDependencies": {
     "babel-minify": "^0.5.1",
     "benchmark": "^2.1.4",
-    "browserify": "^16.3.0",
+    "browserify": "^17.0.0",
     "standard": "*",
     "tape": "^5.4.0"
   },
